@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Employee Registration</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('pic2.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 99% 98%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 92vh;
+            margin: 0;
+        }
+
+        #container {
+            margin-top: 100px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #000000;
+            text-decoration: underline;
+            display: flex;
+            align-items: center; /* Align text and image vertically */
+        }
+
+        h2 img {
+            margin-left: 10px; /* Adjust spacing between text and image */
+            width: 190px; /* Adjust image size */
+            height: 100px; /* Maintain aspect ratio */
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #000000;
+        }
+
+        input {
+            width: calc(100% - 12px);
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #4285F4;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #000000;
+        }
+
+        #error-message {
+            color: red;
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+
+      <h2>Employee Registration Form <img src=" pic3.jpg" alt="Small Image"></h2>
+
+        <div id="error-message"></div>
+        <br>
+
+        <form id="employeeRegistrationForm" onsubmit="return validateForm()">
+	<fieldset>
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required>
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required>
+
+	    <label for="designation">Designation:</label>
+            <input type="text" id="designation" name="designation" required>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+
+            <label for="joiningDate">Joining Date:</label>
+            <input type="date" id="joiningDate" name="joiningDate" required>
+
+            <label for="salary">Salary:</label>
+            <input type="number" id="salary" name="salary" required>
+
+            <button type="submit">Submit</button>
+	</fieldset>
+        </form>
+
+    </div>
+
+    <script>
+    function validateForm() {
+  	var dob = document.getElementById('dob').value;
+  	var joiningDate = document.getElementById('joiningDate').value;
+  	var salary = document.getElementById('salary').value;
+  	var db = new Date(dob);
+  	var age = calculateAge(db);
+
+
+	if (joiningDate < dob) {
+            displayErrorMessage('Joining Date cannot be less than Date of Birth.....');
+            return false;
+        }
+
+	if (age < 18) {
+    		displayErrorMessage('You Must Be 18+ To Fill This Form..... ');
+    		return false;
+  	}
+	
+	if (age >= 65) {
+    		displayErrorMessage('You Are Greater Than 65 Years, Enjoy Your Retirement.....');
+    		return false;
+  	}
+
+        if (!isValidDate(dob)) {
+            displayErrorMessage('Invalid Date of Birth.....');
+            return false;
+        }
+
+        if (!isValidDate(joiningDate)) {
+            displayErrorMessage('Invalid Joining Date.....');
+            return false;
+        }
+
+        if (salary <= 0) {
+            displayErrorMessage('Salary should be greater than 0.....');
+            return false;
+        }
+          document.write("Form Submitted");
+            return true;
+    }
+
+    function isValidDate(dateString) {
+        var regex = /^\d{4}-\d{2}-\d{2}$/;
+        return regex.test(dateString);
+    }
+
+    function displayErrorMessage(message) {
+        var errorMessageElement = document.getElementById('error-message');
+        errorMessageElement.innerText = message;
+    }
+
+    function calculateAge(dateOfBirth) {
+  	const today = new Date();
+  	const differenceInMilliseconds = today.getTime() - dateOfBirth.getTime();
+  	const ageInYears = Math.floor(differenceInMilliseconds / (365.25 * 24 * 60 * 60 * 1000));
+  	return ageInYears;
+    }
+
+</script>
+</body>
+</html>
+
