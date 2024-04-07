@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admission Form</title>
+    <style>
+       
+        #admissionForm {
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            max-width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            margin-right: 50px;
+        }
+       #center {
+           border: 5px solid;
+           margin: auto;
+           width: 50%;
+           padding: 10px;
+           height:100px;
+           margin:100px;
+       }
+      body {
+            font-family: 'Arial', sans-serif;
+            
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            height: 100vh;
+        }
+   
+	
+       
+    </style>
+</head>
+<body background="pic.jpg">
+        <div id="a">
+        <h2 align="center">Welcome to Nowrosjee Wadia College!</h2>
+        <p>This is the admission form for candidates who wish to apply at Nowrosjee Wadia College. Please fill out the form below to apply.</p>
+        </div>
+
+    <div id="admissionForm">
+        <h2>Application Form</h2>
+
+        <form onsubmit="return validateForm()">
+            <label for="prnNo">PRN No.:</label>
+            <input type="text" id="prnNo" name="prnNo" maxlength="12" oninput="validatePRN()" required>
+            <br><br>
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" onkeyup="convertToUpperCase()" required>
+            <br><br>
+            <label for="position">Applying For Course:</label>
+	    <select id="position" name="position" required>
+                <option value=" selected">Select Option</option>
+		
+                <option value="mcs">Master of Science (Computer Science)</option>
+		<option value="mcs">Master of Science (Psychology)</option>
+		<option value="march">Masters of Architecture (M.Arch)</option>
+                <option value="mca">Master of Computer Application</option>
+		
+            </select>
+            <br><br>
+            <label for="experience">Last Qualification Details:</label>
+            <select id="experience" name="experience" required>
+                <option value=" selected">Select Option</option>
+                <option value="firstclassdist">Bachelor of Science (Computer Science)</option>
+		<option value="firstclass">Bachelor of Science (Psychology)</option>
+                <option value="secondclass">Bachelor of Architecture (M.Arch)</option>
+                <option value="thirdclass">Bachelor of Computer Application</option>
+            </select>
+            <br><br>
+            <br>
+            <input type="submit" value="Submit Application">
+        </form>
+    </div>
+
+    <script>
+        function validatePRN() {
+            var prnInput = document.getElementById("prnNo");
+            
+            prnInput.value = prnInput.value.replace(/[^0-9]/g, '');
+            
+            if (prnInput.value.length > 12) {
+                prnInput.setCustomValidity("PRN No. should not exceed 12 digits");
+            } else {
+                prnInput.setCustomValidity("");
+            }
+           
+        }
+
+        function convertToUpperCase() {
+            var nameInput = document.getElementById("name");
+            nameInput.value = nameInput.value.toUpperCase();
+        }
+
+        function validateForm() {
+            document.write("Form submmitted successfully");
+            return true;
+
+        }
+    </script>
+
+</body>
+</html>
+
