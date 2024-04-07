@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Details</title>
+</head>
+<body>
+    <h1>Employee Details</h1>
+    <a href="/emp">Employee Details</a>
+    <% emps.forEach((emp, emp1) => { %>
+        <h2><%= emp.Name %></h2>
+        <p><%= emp.Age %></p>
+        <p><%= emp.Designation %></p>
+    <% }) %>
+    
+</body>
+</html>
